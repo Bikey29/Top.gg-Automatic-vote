@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const wait = require('@trenskow/wait');
 const { BOT_ID, COOKIE } = require('./config.json');
 if (!BOT_ID) throw new Error('BOT_ID not provided');
 if (!COOKIE) throw new Error('COOKIE not provided');
@@ -11,6 +12,7 @@ const vote = async () => {
 
 	await page.setCookie({ name: 'connect.sid', value: COOKIE, domain: 'top.gg', path: '/' });
 	await page.goto(`https://top.gg/bot/${BOT_ID}/vote`);
+	await wait('18s');
 	await page.click('#votingvoted');
 
 	console.log('Successfully voted');
